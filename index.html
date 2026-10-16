@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nago — Menú</title>
+<meta name="description" content="Menú digital de Nago: cold bar, ensaladas, sopas, platos para compartir, platos fuertes y egg rolls.">
+<meta name="theme-color" content="#1E3A2B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800;900&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4EFE4; --surface:#FFFDF8; --ink:#18201B; --muted:#5D6A61; --line:#E4DCCB;
+  --green:#1E3A2B; --green-2:#2F5A40; --leaf:#5C8A5F; --bamboo:#B5C79A;
+  --coral:#CF5F45; --coral-soft:#F7E2DA; --chip:#EAE3D3; --chip-ink:#2B352E;
+  --hero-ink:#F4EFE4; --shadow:0 1px 2px rgba(24,32,27,.06),0 8px 24px -12px rgba(24,32,27,.18);
+  --radius:18px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1511; --surface:#172019; --ink:#ECE8DD; --muted:#A3AEA5; --line:#27322A;
+    --green:#0B1A12; --green-2:#1B3325; --leaf:#88B48A; --bamboo:#6E8458;
+    --coral:#F08B70; --coral-soft:#3A2520; --chip:#202A23; --chip-ink:#DCE4D8;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -14px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F1511; --surface:#172019; --ink:#ECE8DD; --muted:#A3AEA5; --line:#27322A;
+  --green:#0B1A12; --green-2:#1B3325; --leaf:#88B48A; --bamboo:#6E8458;
+  --coral:#F08B70; --coral-soft:#3A2520; --chip:#202A23; --chip-ink:#DCE4D8;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -14px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:"Archivo",system-ui,sans-serif;font-size:16px;line-height:1.5;overflow-x:hidden}
+img{display:block;max-width:100%}
+button,input{font:inherit;color:inherit}
+
+/* ---------- Hero ---------- */
+.hero{
+  position:relative;overflow:hidden;color:var(--hero-ink);
+  background:
+    radial-gradient(120% 80% at 85% 0%, rgba(181,199,154,.28), transparent 60%),
+    radial-gradient(90% 70% at 0% 100%, rgba(92,138,95,.35), transparent 60%),
+    linear-gradient(160deg,var(--green-2),var(--green));
+  padding:56px 16px 40px;text-align:center;
+}
+.hero::before,.hero::after{
+  content:"";position:absolute;width:260px;height:260px;opacity:.16;pointer-events:none;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23EAF2DF' d='M50 4C26 10 10 30 10 54c0 22 16 38 38 42V58l-14 8 14-16V36l-10 6 10-12V4zm4 0v26l10 12-10-6v14l14 16-14-8v38c22-4 36-20 36-42C90 30 76 10 54 4z'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+.hero::before{left:-70px;top:-40px;transform:rotate(-28deg)}
+.hero::after{right:-80px;bottom:-90px;transform:rotate(150deg)}
+.logo{
+  position:relative;font-weight:900;letter-spacing:.06em;line-height:.9;
+  font-size:clamp(72px,22vw,148px);
+  background:
+    repeating-linear-gradient(115deg,#CFE3B8 0 10px,#9CC08A 10px 18px,#E8F1DA 18px 24px,#7FAE76 24px 34px);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 2px 0 rgba(0,0,0,.18));
+}
+.tagline{position:relative;margin-top:14px;font-family:"Fraunces",serif;font-style:italic;font-size:18px;opacity:.88}
+.hero-meta{position:relative;margin-top:18px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.hero-meta span{font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;border:1px solid rgba(244,239,228,.3);border-radius:999px}
+
+/* ---------- Sticky nav ---------- */
+.bar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--line)}
+.bar-top{display:flex;gap:8px;align-items:center;padding:10px 16px 6px;max-width:1180px;margin:0 auto}
+.search{flex:1;min-width:0;position:relative}
+.search input{width:100%;height:40px;border-radius:999px;border:1px solid var(--line);background:var(--surface);padding:0 14px 0 38px;font-size:15px;outline:none}
+.search input:focus{border-color:var(--leaf);box-shadow:0 0 0 3px color-mix(in srgb,var(--leaf) 25%,transparent)}
+.search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--muted)}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--surface);flex:none}
+.lang button{border:0;background:none;padding:0 12px;height:38px;font-size:13px;font-weight:600;letter-spacing:.06em;cursor:pointer;color:var(--muted)}
+.lang button[aria-pressed="true"]{background:var(--green-2);color:#F4EFE4}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:6px 16px 12px;max-width:1180px;margin:0 auto;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;text-decoration:none;color:var(--chip-ink);background:var(--chip);font-size:14px;font-weight:500;padding:8px 14px;border-radius:999px;white-space:nowrap;transition:background .2s,color .2s}
+.chip.active{background:var(--coral);color:#fff}
+
+/* ---------- Sections ---------- */
+main{max-width:1180px;margin:0 auto;padding:8px 16px 40px}
+.draft{margin:16px 0 0;padding:12px 14px;border-radius:12px;background:var(--coral-soft);color:var(--ink);font-size:13.5px;border:1px dashed var(--coral)}
+section{padding-top:36px;scroll-margin-top:118px}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:16px}
+.sec-head h2{font-weight:800;text-transform:uppercase;letter-spacing:.12em;font-size:22px;color:var(--coral)}
+.sec-head .rule{flex:1;height:1px;background:var(--line)}
+.sec-head .count{font-size:12px;color:var(--muted);letter-spacing:.08em;white-space:nowrap}
+.sec-head h2{white-space:nowrap}
+@media (max-width:380px){
+  .sec-head h2{font-size:18px;letter-spacing:.08em}
+  .ph{width:80px;height:80px}
+  .dish{gap:12px;padding:10px}
+  .row h3{font-size:17px}
+}
+.sec-note{color:var(--muted);font-size:14px;margin:-8px 0 16px;font-family:"Fraunces",serif;font-style:italic}
+
+.grid{display:grid;grid-template-columns:1fr;gap:12px}
+@media (min-width:760px){.grid{grid-template-columns:1fr 1fr;gap:16px}}
+@media (min-width:1100px){.grid{grid-template-columns:1fr 1fr 1fr}}
+
+.dish{display:flex;gap:14px;background:var(--surface);border-radius:var(--radius);padding:12px;box-shadow:var(--shadow);border:1px solid var(--line)}
+.ph{flex:none;width:96px;height:96px;border-radius:14px;overflow:hidden;position:relative;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23ffffff' fill-opacity='.22' d='M50 4C26 10 10 30 10 54c0 22 16 38 38 42V58l-14 8 14-16V36l-10 6 10-12V4zm4 0v26l10 12-10-6v14l14 16-14-8v38c22-4 36-20 36-42C90 30 76 10 54 4z'/%3E%3C/svg%3E") 70% 30%/90px no-repeat,
+    linear-gradient(145deg,var(--leaf),var(--green-2));
+}
+.ph .ini{position:absolute;inset:0;display:grid;place-items:center;font-family:"Fraunces",serif;font-style:italic;font-size:30px;color:rgba(255,255,255,.85)}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.txt{flex:1;min-width:0;display:flex;flex-direction:column}
+.row{display:flex;align-items:flex-start;gap:10px}
+.row h3{flex:1;font-family:"Fraunces",serif;font-weight:600;font-size:18.5px;line-height:1.2}
+.price{flex:none;font-weight:800;font-size:17px;color:var(--coral);white-space:nowrap;font-variant-numeric:tabular-nums}
+.price small{font-weight:600;font-size:12px;color:var(--muted);margin-left:2px}
+.desc{margin-top:4px;color:var(--muted);font-size:14.5px;line-height:1.45}
+.opts{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.opts .lbl{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:2px}
+.pill{font-size:12.5px;padding:3px 9px;border-radius:999px;background:var(--chip);color:var(--chip-ink)}
+.pill.add{background:var(--coral-soft);color:var(--coral);font-weight:600}
+.flag{margin-top:8px;align-self:flex-start;font-size:11.5px;font-weight:600;color:var(--coral);border:1px dashed var(--coral);padding:2px 8px;border-radius:999px}
+.dish{cursor:pointer;transition:transform .2s ease,box-shadow .2s ease;-webkit-tap-highlight-color:transparent}
+.dish:hover{transform:translateY(-2px)}
+.dish:active{transform:scale(.985)}
+.dish:focus-visible{outline:2px solid var(--leaf);outline-offset:2px}
+.ph .b3d{position:absolute;right:5px;bottom:5px;z-index:2;font-size:10px;font-weight:800;letter-spacing:.06em;background:rgba(24,32,27,.72);color:#fff;padding:2px 7px;border-radius:999px}
+
+/* ---------- Visor del plato ---------- */
+.viewer{position:fixed;inset:0;z-index:50;display:flex;align-items:flex-end;justify-content:center;background:rgba(8,14,10,.62);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
+.viewer.open{opacity:1;visibility:visible}
+.sheet{width:100%;max-width:540px;max-height:100dvh;overflow-y:auto;overscroll-behavior:contain;background:var(--surface);border-radius:24px 24px 0 0;padding:12px 16px calc(20px + env(safe-area-inset-bottom));transform:translateY(40px);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.viewer.open .sheet{transform:none}
+@media (min-width:760px){.viewer{align-items:center}.sheet{border-radius:24px;max-height:94vh;padding:16px 20px 22px}}
+.v-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.v-cat{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--coral)}
+.icon-btn{width:40px;height:40px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);display:grid;place-items:center;cursor:pointer;font-size:18px;line-height:1}
+.stage{position:relative;aspect-ratio:1/1;width:100%;max-height:62dvh;margin:0 auto;border-radius:20px;perspective:900px;touch-action:none;user-select:none;-webkit-user-select:none;overflow:hidden;cursor:grab;
+  background:radial-gradient(circle at 50% 38%,color-mix(in srgb,var(--bamboo) 40%,var(--surface)),var(--bg) 75%)}
+.stage:active{cursor:grabbing}
+.stage::after{content:"";position:absolute;left:18%;right:18%;bottom:6%;height:7%;border-radius:50%;background:rgba(0,0,0,.22);filter:blur(12px);pointer-events:none}
+.layer{position:absolute;inset:10%;z-index:1;transform-style:preserve-3d;will-change:transform}
+.layer img,.layer .ph-big{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:22px;box-shadow:0 34px 50px -22px rgba(0,0,0,.6)}
+.layer img{-webkit-user-drag:none}
+.layer .ph-big{display:grid;place-items:center;font-family:"Fraunces",serif;font-style:italic;font-size:96px;color:rgba(255,255,255,.85);background:linear-gradient(145deg,var(--leaf),var(--green-2))}
+.glare{position:absolute;inset:0;border-radius:22px;pointer-events:none;mix-blend-mode:soft-light;background:radial-gradient(circle at var(--gx,50%) var(--gy,30%),rgba(255,255,255,.7),transparent 55%)}
+.mv{position:absolute;inset:0;z-index:1}
+.mv model-viewer{width:100%;height:100%;--poster-color:transparent}
+.zoom-ctl{position:absolute;right:10px;bottom:10px;z-index:3;display:flex;flex-direction:column;gap:6px}
+.zoom-ctl button{width:38px;height:38px;border-radius:999px;border:0;background:color-mix(in srgb,var(--surface) 88%,transparent);color:var(--ink);box-shadow:var(--shadow);font-size:20px;line-height:1;cursor:pointer}
+.zlevel{position:absolute;left:10px;bottom:10px;z-index:3;font-size:12px;font-weight:700;padding:4px 9px;border-radius:999px;background:color-mix(in srgb,var(--surface) 88%,transparent);color:var(--ink)}
+.hint{text-align:center;color:var(--muted);font-size:12.5px;margin:10px 0 14px}
+.v-info .row h2{flex:1;font-family:"Fraunces",serif;font-weight:600;font-size:26px;line-height:1.15}
+.v-info .price{font-size:22px}
+.v-info .desc{font-size:15.5px;margin-top:8px}
+.v-nav{display:flex;justify-content:space-between;gap:10px;margin-top:18px}
+.v-nav button{flex:1;min-width:0;height:44px;border-radius:999px;border:1px solid var(--line);background:var(--chip);color:var(--chip-ink);font-weight:600;font-size:14px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 14px}
+.empty{display:none;text-align:center;color:var(--muted);padding:40px 0}
+
+footer{border-top:1px solid var(--line);padding:28px 16px 48px;text-align:center;color:var(--muted);font-size:13.5px}
+footer .mark{font-weight:900;letter-spacing:.2em;color:var(--leaf);font-size:20px;margin-bottom:6px}
+footer p+p{margin-top:4px}
+.credits{margin:14px auto 0;max-width:640px;text-align:left;font-size:12px}
+.credits summary{cursor:pointer;text-align:center;text-decoration:underline;text-underline-offset:3px}
+.credits ul{list-style:none;margin-top:10px;display:grid;gap:4px}
+.credits a{color:inherit;overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="logo" aria-label="Nago">NAGO</div>
+  <p class="tagline" data-i18n="tagline"></p>
+  <div class="hero-meta"><span data-i18n="meta1"></span><span data-i18n="meta2"></span></div>
+</header>
+
+<div class="bar">
+  <div class="bar-top">
+    <label class="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" autocomplete="off">
+    </label>
+    <div class="lang" role="group" aria-label="Idioma / Language">
+      <button type="button" data-lang="es">ES</button>
+      <button type="button" data-lang="en">EN</button>
+    </div>
+  </div>
+  <nav class="chips" id="chips"></nav>
+</div>
+
+<main>
+  <div class="draft" id="draft" hidden></div>
+  <div id="menu"></div>
+  <p class="empty" id="empty"></p>
+</main>
+
+<footer>
+  <div class="mark">NAGO</div>
+  <p data-i18n="currency"></p>
+  <p id="photoNote" hidden data-i18n="photos"></p>
+  <details class="credits" id="credits" hidden><summary data-i18n="credits"></summary><ul id="creditList"></ul></details>
+</footer>
+
+<div class="viewer" id="viewer" aria-hidden="true">
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="vTitle">
+    <div class="v-top"><span class="v-cat" id="vCat"></span><button type="button" class="icon-btn" id="vClose">✕</button></div>
+    <div class="stage" id="stage">
+      <div class="layer" id="layer"></div>
+      <div class="mv" id="mv" hidden></div>
+      <span class="zlevel" id="zLevel">1×</span>
+      <div class="zoom-ctl" id="zCtl">
+        <button type="button" id="zIn" aria-label="Zoom +">+</button>
+        <button type="button" id="zOut" aria-label="Zoom −">−</button>
+        <button type="button" id="zReset" aria-label="Reset">⟲</button>
+      </div>
+    </div>
+    <p class="hint" id="vHint"></p>
+    <div class="v-info" id="vInfo"></div>
+    <div class="v-nav"><button type="button" id="vPrev"></button><button type="button" id="vNext"></button></div>
+  </div>
+</div>
+
+<script src="fotos/creditos.js"></script>
+<script>
+/* Ponga DRAFT en false cuando el restaurante confirme los precios marcados. */
+const DRAFT = true;
+
+const UI = {
+  es:{tagline:"Cocina asiática con alma caribeña",meta1:"Barra fría · Wok · Bao",meta2:"Precios en gourdes",
+      search:"Buscar un plato…",empty:"No encontramos platos con ese nombre.",choose:"Elige",fillings:"Rellenos",sauces:"Salsas",side:"Acompañante",protein:"Proteína",add:"Extra",
+      each:"c/u",verify:"Precio por confirmar",dishes:"platos",
+      draft:"Borrador para revisión: los precios marcados como «por confirmar» eran difíciles de leer en la foto original. Este aviso desaparece al publicar.",
+      currency:"Precios en gourdes haitianas (G).",photos:"Las fotografías son ilustrativas.",credits:"Créditos de las fotografías",by:"por",
+      hint:"Arrastra para girar · pellizca, rueda o doble toque para hacer zoom",hint3d:"Modelo 3D: arrastra para girar y pellizca para acercar",
+      close:"Cerrar",prev:"‹ Anterior",next:"Siguiente ›"},
+  en:{tagline:"Asian kitchen with a Caribbean soul",meta1:"Cold bar · Wok · Bao",meta2:"Prices in gourdes",
+      search:"Search a dish…",empty:"No dishes match that search.",choose:"Choose",fillings:"Fillings",sauces:"Sauces",side:"Side",protein:"Protein",add:"Add",
+      each:"each",verify:"Price to be confirmed",dishes:"dishes",
+      draft:"Review draft: prices marked “to be confirmed” were hard to read on the original photo. This notice disappears once published.",
+      currency:"Prices in Haitian gourdes (G).",photos:"Photos are for illustration purposes.",credits:"Photo credits",by:"by",
+      hint:"Drag to tilt · pinch, scroll or double-tap to zoom",hint3d:"3D model: drag to rotate, pinch to zoom",
+      close:"Close",prev:"‹ Previous",next:"Next ›"}
+};
+
+/* Datos transcritos fielmente del menú original. Fotos: fotos/<id>.jpg */
+const MENU = [
+ {id:"cold-bar",name:{en:"Cold Bar",es:"Barra fría"},items:[
+  {id:"shrimp-ceviche",name:"Shrimp Ceviche",price:"G900",
+   en:"Ecuadorian-style shrimp ceviche in a bright tomato and orange base, finished with cilantro.",
+   es:"Ceviche de camarón al estilo ecuatoriano, en base de tomate y naranja, con cilantro."},
+  {id:"white-fish-ceviche",name:"White Fish Ceviche",price:"G900",
+   en:"The traditional way: fresh fish cured in lime.",
+   es:"A la manera tradicional: pescado curado en limón."},
+  {id:"lambi-ceviche",name:"Lambi Ceviche",price:"G900",
+   en:"Conch (lambi) cured in lime with red onion and peppers.",
+   es:"Lambí (caracol de mar) curado en limón con cebolla morada y pimientos."},
+  {id:"fish-carpaccio",name:"Fish Carpaccio",price:"G800",
+   en:"Fish carpaccio with pink peppercorn, bell peppers and lime.",
+   es:"Carpaccio de pescado con pimienta rosa, pimientos y limón."},
+  {id:"octopus-carpaccio",name:"Octopus Carpaccio",price:"G800",
+   en:"Octopus carpaccio with lime, masago and bell peppers.",
+   es:"Carpaccio de pulpo con limón, masago y pimientos."}
+ ]},
+ {id:"small-plates",name:{en:"Small Plates",es:"Para compartir"},items:[
+  {id:"edamame",name:"Edamame",price:"G500",
+   en:"Edamame in your choice of style.",es:"Edamame al estilo que prefieras.",
+   opts:{k:"choose",items:[{en:"Sea salt",es:"Sal marina"},{en:"Spicy",es:"Picante"},{en:"Garlic",es:"Ajo"}]}},
+  {id:"bbq-pork",name:"BBQ Pork",price:"G600",
+   en:"Chinese-style smoked BBQ pork.",es:"Cerdo BBQ ahumado al estilo chino."},
+  {id:"rock-shrimp",name:"Rock Shrimp",price:"G850",
+   en:"Rock shrimp with a creamy spicy sauce.",es:"Rock shrimp con salsa cremosa picante."},
+  {id:"crab-rangoon",name:"Crab Rangoon",price:"G800",
+   en:"Crab rangoon with sweet & sour dipping sauce.",es:"Crab rangoon con salsa agridulce para mojar."},
+  {id:"salt-pepper-shrimp",name:"Salt & Pepper Shrimp",price:"G900",
+   en:"Salt & pepper shrimp with sautéed onions and jalapeños.",es:"Camarones a la sal y pimienta con cebolla salteada y jalapeños."},
+  {id:"coconut-shrimp",name:"Coconut Shrimp",price:"G700",
+   en:"Coconut shrimp with a sweet chili glaze.",es:"Camarones al coco con glaseado de chile dulce."},
+  {id:"spicy-tuna-crispy-rice",name:"Spicy Tuna on Crispy Rice",price:"G700",
+   en:"Spicy tuna on crispy rice, topped with jalapeño.",es:"Atún picante sobre arroz crujiente, con jalapeño encima."},
+  {id:"cauliflower-wings",name:"Cauliflower Wings",price:"G600",
+   en:"You would think it’s a chicken wing.",es:"Pensarás que es un ala de pollo."},
+  {id:"popcorn-chicken",name:"Popcorn Chicken",price:"G500",
+   en:"Popcorn chicken with honey aioli.",es:"Popcorn chicken con alioli de miel."},
+  {id:"chicken-wings",name:"Chicken Wings",price:"G500",
+   en:"Chicken wings in your choice of sauce.",es:"Alitas de pollo con la salsa que elijas.",
+   opts:{k:"sauces",items:[{en:"Regular",es:"Clásica"},{en:"Spicy",es:"Picante"},{en:"Sweet & sour",es:"Agridulce"},{en:"Hot & sour",es:"Picante y ácida"},{en:"Teriyaki",es:"Teriyaki"},{en:"Korean BBQ",es:"BBQ coreana"}]}},
+  {id:"salt-pepper-calamari",name:"Salt & Pepper Calamari",price:"G900",
+   en:"Salt & pepper calamari with sautéed onions and jalapeños.",es:"Calamares a la sal y pimienta con cebolla salteada y jalapeños."},
+  {id:"pata-kon",name:"Pata Kon",price:"G900",
+   en:"Fried plantain with smoked salmon, spicy crab, arugula and caviar.",es:"Plátano frito con salmón ahumado, cangrejo picante, rúcula y caviar."},
+  {id:"truffled-seared-scallops",name:"Truffled Seared Scallops",price:"G950",
+   en:"Seared scallops with truffled aioli and arugula.",es:"Vieiras selladas con alioli trufado y rúcula."},
+  {id:"buffalo-shrimp",name:"Buffalo Shrimp",price:"G900",
+   en:"Buffalo shrimp with blue cheese sauce.",es:"Camarones buffalo con salsa de queso azul."},
+  {id:"bao-buns",name:"Bao Buns",price:"G400",each:true,
+   en:"Soft bao buns, priced per piece. Mix and match your fillings.",es:"Panecillos bao, precio por unidad. Combina los rellenos que quieras.",
+   opts:{k:"fillings",items:[{en:"Fried chicken",es:"Pollo frito"},{en:"Fried fish",es:"Pescado frito"},{en:"Fried cauliflower",es:"Coliflor frita"},{en:"Hot & sour chicken",es:"Pollo picante y ácido"},{en:"Sticky beef",es:"Res glaseada"},{en:"Rock shrimp",es:"Rock shrimp"},{en:"Korean BBQ chicken",es:"Pollo BBQ coreano"}]}}
+ ]},
+ {id:"egg-rolls",name:{en:"Egg Rolls",es:"Egg rolls"},items:[
+  {id:"steak-cheese-egg-roll",name:"Steak & Cheese",price:"G500",
+   en:"Steak & cheese egg roll with spicy mayo.",es:"Egg roll de carne y queso con mayonesa picante."},
+  {id:"buffalo-chicken-egg-roll",name:"Buffalo Chicken",price:"G500",
+   en:"Buffalo chicken egg roll with blue cheese sauce.",es:"Egg roll de pollo buffalo con salsa de queso azul."},
+  {id:"griot-pikliz-egg-roll",name:"Griot & Pikliz",price:"G500",
+   en:"Haitian griot and pikliz in an egg roll, with spicy mayo.",es:"Griot y pikliz haitianos en egg roll, con mayonesa picante."}
+ ]},
+ {id:"salads",name:{en:"Salads",es:"Ensaladas"},items:[
+  {id:"nago-salad",name:"Nago Salad",price:"G900",
+   en:"Served in a rice cracker bowl with cucumber, spicy crab, carrot and wakame.",es:"Servida en un bol de galleta de arroz con pepino, cangrejo picante, zanahoria y wakame.",
+   add:{en:"Tuna or Salmon +G300",es:"Atún o salmón +G300"}},
+  {id:"churrasco-salad",name:"Churrasco Salad",price:"G1400",
+   en:"Artisan lettuce with grilled apples, gorgonzola and pecans, finished with a balsamic glaze.",es:"Lechugas artesanales con manzana a la parrilla, gorgonzola y pecanas, con reducción balsámica."},
+  {id:"thai-chicken-salad",name:"Thai Chicken Salad",price:"G1100",
+   en:"Chicken with cabbage, carrot, cilantro and fried wonton, with peanut dressing.",es:"Pollo con repollo, zanahoria, cilantro y wonton frito, con aderezo de maní."}
+ ]},
+ {id:"soups",name:{en:"Soups",es:"Sopas"},items:[
+  {id:"miso-soup",name:"Miso Soup",price:"G500",
+   en:"Miso soup with seaweed and tofu.",es:"Sopa de miso con alga y tofu."},
+  {id:"beef-pho",name:"Beef Pho",price:"G700",
+   en:"Beef broth with sliced beef, cilantro and lime.",es:"Caldo de res con láminas de carne, cilantro y limón."},
+  {id:"fish-ball-soup",name:"Fish Ball Soup",price:"G500",
+   en:"Clear broth with fish balls and cilantro.",es:"Caldo claro con bolitas de pescado y cilantro."}
+ ]},
+ {id:"large-plates",name:{en:"Large Plates",es:"Platos fuertes"},items:[
+  {id:"orange-glazed-salmon",name:"Orange Glazed Salmon",price:"G1900",
+   en:"Orange-glazed salmon served with vegetable fried rice.",es:"Salmón glaseado a la naranja, servido con arroz frito de vegetales."},
+  {id:"pad-thai",name:"Pad Thai",price:"G1300",verify:true,
+   en:"Stir-fried noodles with vegetables, peanuts, lime and cilantro.",es:"Fideos salteados al wok con vegetales, maní, limón y cilantro.",
+   opts:{k:"protein",items:[{en:"Shrimp",es:"Camarón"},{en:"Chicken",es:"Pollo"}]}},
+  {id:"churrasco",name:"Churrasco",price:"G2900",verify:true,
+   en:"Churrasco with wok vegetables.",es:"Churrasco con vegetales al wok.",
+   opts:{k:"side",items:[{en:"Fried rice",es:"Arroz frito"},{en:"French fries",es:"Papas fritas"}]}},
+  {id:"thai-coconut-curry-chicken",name:"Thai Coconut Curry Chicken",price:"G1100",verify:true,
+   en:"Chicken in Thai coconut curry, served with white rice.",es:"Pollo al curry tailandés de coco, servido con arroz blanco."},
+  {id:"djon-djon-fettucini",name:"Djon Djon Fettucini",price:"G1500",verify:true,
+   en:"Fresh fettucini in a creamy djon djon (Haitian black mushroom) sauce with jumbo shrimp.",es:"Fettucini fresco en salsa cremosa de djon djon (hongo negro haitiano) con camarones jumbo."},
+  {id:"kung-fu-fish",name:"Kung Fu Fish",price:"G2250",verify:true,
+   en:"Whole fried fish cut into pieces, with szechuan sauce and cilantro.",es:"Pescado entero frito y cortado en piezas, con salsa szechuan y cilantro."}
+ ]}
+];
+
+let lang = "es";
+try{ const s = localStorage.getItem("nago-lang"); if(s==="en"||s==="es") lang = s; }catch(e){}
+
+const $ = s => document.querySelector(s);
+const menuEl = $("#menu"), chipsEl = $("#chips");
+
+function render(){
+  const t = UI[lang];
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i18n]").forEach(el => el.textContent = t[el.dataset.i18n]);
+  document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang===lang));
+  $("#q").placeholder = t.search;
+  $("#empty").textContent = t.empty;
+  const draft = $("#draft"); draft.hidden = !DRAFT; draft.textContent = t.draft;
+
+  chipsEl.innerHTML = MENU.map(c => `<a class="chip" href="#${c.id}" data-sec="${c.id}">${c.name[lang]}</a>`).join("");
+  menuEl.innerHTML = MENU.map(c => `
+    <section id="${c.id}">
+      <div class="sec-head"><h2>${c.name[lang]}</h2><span class="rule"></span><span class="count">${c.items.length} ${t.dishes}</span></div>
+      <div class="grid">${c.items.map(d => dish(d,t)).join("")}</div>
+    </section>`).join("");
+
+  menuEl.querySelectorAll(".ph img").forEach(img => {
+    img.addEventListener("load", () => { img.previousElementSibling.remove(); $("#photoNote").hidden = false; });
+    img.addEventListener("error", () => img.remove());
+  });
+  renderCredits(t);
+  filter(); spy();
+}
+
+function renderCredits(t){
+  const c = window.PHOTO_CREDITS || {};
+  const names = Object.fromEntries(MENU.flatMap(s => s.items.map(d => [d.id, d.name])));
+  const rows = Object.entries(c).filter(([id]) => names[id]);
+  $("#credits").hidden = !rows.length;
+  const esc = s => String(s).replace(/[&<>"]/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch]));
+  $("#creditList").innerHTML = rows.map(([id,r]) =>
+    `<li><strong>${names[id]}</strong>: ${t.by} ${esc(r.creator)} · <a href="${esc(r.license_url||"")}" target="_blank" rel="noopener">${esc(r.license)}</a> · <a href="${esc(r.source||"")}" target="_blank" rel="noopener">Openverse</a></li>`).join("");
+}
+
+function extras(d,t){
+  const opts = d.opts ? `<div class="opts"><span class="lbl">${t[d.opts.k]}</span>${d.opts.items.map(o=>`<span class="pill">${o[lang]}</span>`).join("")}</div>` : "";
+  const add = d.add ? `<div class="opts"><span class="lbl">${t.add}</span><span class="pill add">${d.add[lang]}</span></div>` : "";
+  const flag = DRAFT && d.verify ? `<span class="flag">${t.verify}</span>` : "";
+  return opts + add + flag;
+}
+const priceHTML = (d,t) => `<span class="price">${d.price}${d.each?`<small>${t.each}</small>`:""}</span>`;
+
+function dish(d,t){
+  return `<article class="dish" data-id="${d.id}" tabindex="0" role="button" aria-label="${d.name}" data-s="${(d.name+" "+d.en+" "+d.es).toLowerCase()}">
+    <figure class="ph"><span class="ini">${d.name[0]}</span><img src="fotos/${d.id}.webp" alt="${d.name}" loading="lazy" decoding="async"><span class="b3d">3D</span></figure>
+    <div class="txt">
+      <div class="row"><h3>${d.name}</h3>${priceHTML(d,t)}</div>
+      <p class="desc">${d[lang]}</p>${extras(d,t)}
+    </div></article>`;
+}
+
+function filter(){
+  const q = $("#q").value.trim().toLowerCase();
+  let shown = 0;
+  menuEl.querySelectorAll("section").forEach(sec => {
+    let n = 0;
+    sec.querySelectorAll(".dish").forEach(a => { const ok = !q || a.dataset.s.includes(q); a.style.display = ok?"":"none"; n += ok; });
+    sec.style.display = n ? "" : "none"; shown += n;
+  });
+  $("#empty").style.display = shown ? "none" : "block";
+}
+
+let io;
+function spy(){
+  if(io) io.disconnect();
+  io = new IntersectionObserver(es => es.forEach(e => {
+    if(!e.isIntersecting) return;
+    chipsEl.querySelectorAll(".chip").forEach(c => {
+      const on = c.dataset.sec === e.target.id;
+      c.classList.toggle("active", on);
+      if(on) chipsEl.scrollTo({left:c.offsetLeft-16,behavior:"smooth"});
+    });
+  }), {rootMargin:"-130px 0px -65% 0px"});
+  menuEl.querySelectorAll("section").forEach(s => io.observe(s));
+}
+
+/* ---------- Visor del plato: inclinación 3D, zoom y desplazamiento ---------- */
+/* Modelos 3D reales opcionales (.glb), p. ej. {"pad-thai":"modelos/pad-thai.glb"}. Si un plato tiene modelo, se muestra en su lugar. */
+const MODELS = {};
+const ALL = MENU.flatMap(c => c.items.map(d => Object.assign(d, {cat:c})));
+const clamp = (v,a,b) => Math.min(b, Math.max(a, v));
+const V = {idx:-1, s:1, tx:0, ty:0, rx:0, ry:0, drag:false, ptrs:new Map(), pinch:null, last:null, gyro:null, raf:0, pushed:false, from:null};
+const viewer = $("#viewer"), stage = $("#stage"), layer = $("#layer");
+const isOpen = () => viewer.classList.contains("open");
+
+function openDish(id, push = true){
+  V.idx = ALL.findIndex(d => d.id === id);
+  if(V.idx < 0) return;
+  V.from = document.activeElement;
+  fillViewer();
+  viewer.classList.add("open"); viewer.setAttribute("aria-hidden","false");
+  document.body.style.overflow = "hidden";
+  if(push){ history.pushState({dish:id}, "", "#plato-" + id); V.pushed = true; }
+  askGyro();
+  if(!V.raf) V.raf = requestAnimationFrame(frame);
+  $("#vClose").focus({preventScroll:true});
+}
+
+function closeDish(fromPop){
+  if(!isOpen()) return;
+  viewer.classList.remove("open"); viewer.setAttribute("aria-hidden","true");
+  document.body.style.overflow = "";
+  $("#mv").innerHTML = "";
+  if(!fromPop){
+    if(V.pushed) history.back();
+    else history.replaceState(null, "", location.pathname + location.search);
+  }
+  V.pushed = false;
+  if(V.from && V.from.focus) V.from.focus({preventScroll:true});
+}
+
+function fillViewer(){
+  const d = ALL[V.idx], t = UI[lang];
+  V.s = 1; V.tx = V.ty = 0; V.rx = -8; V.ry = 14;
+  $("#vCat").textContent = d.cat.name[lang];
+  $("#vClose").setAttribute("aria-label", t.close);
+  const model = MODELS[d.id];
+  $("#mv").hidden = !model; layer.hidden = !!model;
+  $("#zCtl").hidden = $("#zLevel").hidden = !!model;
+  stage.style.touchAction = model ? "pan-y" : "none";
+  if(model){
+    loadModelViewer();
+    $("#mv").innerHTML = `<model-viewer src="${model}" alt="${d.name}" camera-controls auto-rotate shadow-intensity="1" touch-action="pan-y" interaction-prompt="none"></model-viewer>`;
+  }else{
+    layer.innerHTML = `<div class="ph-big">${d.name[0]}</div><img src="fotos/${d.id}.webp" alt="${d.name}" draggable="false"><span class="glare"></span>`;
+    const img = layer.querySelector("img");
+    img.addEventListener("load", () => layer.querySelector(".ph-big")?.remove());
+    img.addEventListener("error", () => img.remove());
+  }
+  $("#vHint").textContent = model ? t.hint3d : t.hint;
+  $("#vInfo").innerHTML = `<div class="row"><h2 id="vTitle">${d.name}</h2>${priceHTML(d,t)}</div><p class="desc">${d[lang]}</p>${extras(d,t)}`;
+  const n = ALL.length, p = ALL[(V.idx-1+n)%n], q = ALL[(V.idx+1)%n];
+  $("#vPrev").textContent = t.prev; $("#vPrev").title = p.name;
+  $("#vNext").textContent = t.next; $("#vNext").title = q.name;
+  apply();
+}
+
+function step(dir){
+  V.idx = (V.idx + dir + ALL.length) % ALL.length;
+  history.replaceState({dish:ALL[V.idx].id}, "", "#plato-" + ALL[V.idx].id);
+  fillViewer();
+  $("#vInfo").scrollIntoView({block:"nearest"});
+}
+
+function apply(){
+  layer.style.transform = `translate3d(${V.tx}px,${V.ty}px,0) rotateX(${V.rx}deg) rotateY(${V.ry}deg) scale(${V.s})`;
+  layer.style.setProperty("--gx", (50 + V.ry*2.2) + "%");
+  layer.style.setProperty("--gy", (30 - V.rx*2.2) + "%");
+  $("#zLevel").textContent = (Math.round(V.s*10)/10) + "×";
+}
+
+function frame(now){
+  if(!isOpen()){ V.raf = 0; return; }
+  if(!V.drag){
+    if(V.s > 1){ V.rx *= .85; V.ry *= .85; }
+    else{
+      const k = now/1000;
+      const tx = Math.sin(k*.9)*5 + (V.gyro ? V.gyro.x : 0);
+      const ty = Math.cos(k*.7)*8 + (V.gyro ? V.gyro.y : 0);
+      V.rx += (tx - V.rx)*.05; V.ry += (ty - V.ry)*.05;
+    }
+  }
+  apply();
+  V.raf = requestAnimationFrame(frame);
+}
+
+function clampPan(){
+  const m = (V.s - 1) * stage.clientWidth * .42;
+  V.tx = clamp(V.tx, -m, m); V.ty = clamp(V.ty, -m, m);
+}
+function zoomTo(s){
+  V.s = clamp(s, 1, 4);
+  if(V.s < 1.02){ V.s = 1; V.tx = V.ty = 0; }
+  clampPan();
+}
+const pinchDist = () => { const [a,b] = [...V.ptrs.values()]; return Math.hypot(a.x-b.x, a.y-b.y) || 1; };
+
+stage.addEventListener("pointerdown", e => {
+  if(!layer.hidden){ try{ stage.setPointerCapture(e.pointerId); }catch(_){} }
+  else return;
+  V.ptrs.set(e.pointerId, {x:e.clientX, y:e.clientY});
+  V.drag = true; V.last = {x:e.clientX, y:e.clientY};
+  if(V.ptrs.size === 2) V.pinch = {d:pinchDist(), s:V.s};
+});
+stage.addEventListener("pointermove", e => {
+  if(!V.ptrs.has(e.pointerId)) return;
+  V.ptrs.set(e.pointerId, {x:e.clientX, y:e.clientY});
+  if(V.ptrs.size >= 2 && V.pinch){ zoomTo(V.pinch.s * pinchDist() / V.pinch.d); return; }
+  const dx = e.clientX - V.last.x, dy = e.clientY - V.last.y;
+  V.last = {x:e.clientX, y:e.clientY};
+  if(V.s > 1){ V.tx += dx; V.ty += dy; clampPan(); }
+  else{ V.ry = clamp(V.ry + dx*.35, -28, 28); V.rx = clamp(V.rx - dy*.35, -28, 28); }
+});
+function endPtr(e){
+  V.ptrs.delete(e.pointerId);
+  if(V.ptrs.size < 2) V.pinch = null;
+  if(V.ptrs.size === 1) V.last = [...V.ptrs.values()][0];
+  if(!V.ptrs.size) V.drag = false;
+}
+["pointerup","pointercancel","lostpointercapture"].forEach(ev => stage.addEventListener(ev, endPtr));
+stage.addEventListener("wheel", e => { if(layer.hidden) return; e.preventDefault(); zoomTo(V.s * Math.exp(-e.deltaY*.0015)); }, {passive:false});
+stage.addEventListener("dblclick", () => { if(!layer.hidden) zoomTo(V.s > 1 ? 1 : 2.5); });
+$("#zIn").addEventListener("click", () => zoomTo(V.s*1.5));
+$("#zOut").addEventListener("click", () => zoomTo(V.s/1.5));
+$("#zReset").addEventListener("click", () => { zoomTo(1); V.rx = V.ry = 0; });
+["zIn","zOut","zReset"].forEach(id => $("#"+id).addEventListener("pointerdown", e => e.stopPropagation()));
+
+function askGyro(){
+  if(V.gyroAsked) return; V.gyroAsked = true;
+  const on = () => window.addEventListener("deviceorientation", e => {
+    if(e.beta == null || e.gamma == null) return;
+    V.gyro = {x:clamp((e.beta - 45) * -.45, -16, 16), y:clamp(e.gamma * .55, -20, 20)};
+  });
+  try{
+    if(typeof DeviceOrientationEvent !== "undefined" && typeof DeviceOrientationEvent.requestPermission === "function")
+      DeviceOrientationEvent.requestPermission().then(r => { if(r === "granted") on(); }).catch(() => {});
+    else on();
+  }catch(_){}
+}
+
+function loadModelViewer(){
+  if(V.mvLoaded) return; V.mvLoaded = true;
+  const s = document.createElement("script");
+  s.type = "module"; s.src = "https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js";
+  document.head.appendChild(s);
+}
+
+menuEl.addEventListener("click", e => { const a = e.target.closest(".dish"); if(a) openDish(a.dataset.id); });
+menuEl.addEventListener("keydown", e => {
+  if((e.key === "Enter" || e.key === " ") && e.target.classList.contains("dish")){ e.preventDefault(); openDish(e.target.dataset.id); }
+});
+$("#vClose").addEventListener("click", () => closeDish(false));
+$("#vPrev").addEventListener("click", () => step(-1));
+$("#vNext").addEventListener("click", () => step(1));
+viewer.addEventListener("click", e => { if(e.target === viewer) closeDish(false); });
+document.addEventListener("keydown", e => {
+  if(!isOpen()) return;
+  if(e.key === "Escape") closeDish(false);
+  else if(e.key === "ArrowLeft") step(-1);
+  else if(e.key === "ArrowRight") step(1);
+});
+window.addEventListener("popstate", e => {
+  if(e.state && e.state.dish){ openDish(e.state.dish, false); V.pushed = true; }
+  else closeDish(true);
+});
+
+$("#q").addEventListener("input", filter);
+document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", () => {
+  lang = b.dataset.lang;
+  try{ localStorage.setItem("nago-lang", lang); }catch(e){}
+  render();
+  if(isOpen()) fillViewer();
+}));
+render();
+if(location.hash.startsWith("#plato-")) openDish(location.hash.slice(7), false);
+</script>
+</body>
+</html>
