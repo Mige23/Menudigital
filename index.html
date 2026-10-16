@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Nago — Menú</title>
+<title>Gogo — Menú</title>
 <meta name="description" content="Menú digital de Nago: cold bar, ensaladas, sopas, platos para compartir, platos fuertes y egg rolls.">
 <meta name="theme-color" content="#1E3A2B">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -169,7 +169,7 @@ footer p+p{margin-top:4px}
 <body>
 
 <header class="hero">
-  <div class="logo" aria-label="Nago">NAGO</div>
+  <div class="logo" aria-label="Nago">GOGO</div>
   <p class="tagline" data-i18n="tagline"></p>
   <div class="hero-meta"><span data-i18n="meta1"></span><span data-i18n="meta2"></span></div>
 </header>
@@ -195,7 +195,7 @@ footer p+p{margin-top:4px}
 </main>
 
 <footer>
-  <div class="mark">NAGO</div>
+  <div class="mark">GOGO</div>
   <p data-i18n="currency"></p>
   <p id="photoNote" hidden data-i18n="photos"></p>
   <details class="credits" id="credits" hidden><summary data-i18n="credits"></summary><ul id="creditList"></ul></details>
@@ -340,7 +340,7 @@ const MENU = [
 ];
 
 let lang = "es";
-try{ const s = localStorage.getItem("nago-lang"); if(s==="en"||s==="es") lang = s; }catch(e){}
+try{ const s = localStorage.getItem("gogo-lang"); if(s==="en"||s==="es") lang = s; }catch(e){}
 
 const $ = s => document.querySelector(s);
 const menuEl = $("#menu"), chipsEl = $("#chips");
